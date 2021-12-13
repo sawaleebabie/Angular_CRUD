@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+    <h3 class="card-title">รายการข้อมูล</h3>
+    <div class="container">
+        <br />
+        <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off"
+            placeholder="&#61442;  Start searching for a Data">
+    </div><br />
+
+    <div class="container">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>ID</th>
+                    <th>First name</th>
+                    <th>Last name</th>
+                    <th>Nickname</th>
+                    <th>Date</th>
+                    <th>Gender</th>
+                    <th>E-Mail</th>
+                    <th>Tel.</th>
+                </tr>
+                <tr>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of data | filter:searchText ; let i=index">
+                    <td>
+                        {{item.id}}
+                    </td>
+                    <td>
+                        {{item.idName}}
+                    </td>
+                    <td>
+                        {{item.firstName}}
+                    </td>
+                    <td>
+                        {{item.lastName}}
+                    </td>
+                    <td>
+                        {{item.nickName}}
+                    </td>
+                    <td>
+                        {{item.date}}
+                    </td>
+                    <td>
+                        {{item.gender}}
+                    </td>
+                    <td class="text">
+                        {{item.Email}}
+                    </td>
+                    <td>
+                        {{item.tel}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div *ngIf='data.length == 0' class="not">
+            <h4>ไม่มีข้อมูล</h4>
+        </div>
+    </div>
+
+</body>
+
+</html>

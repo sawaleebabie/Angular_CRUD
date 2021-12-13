@@ -1,0 +1,28 @@
+@import url("//netdna.bootstrapcdn.com/font-awesome/3.0/css/font-awesome.css");
+@import url('https://fonts.googleapis.com/css2?family=Karantina:wght@300&family=Varela+Round&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Mitr:wght@300&display=swap');
+
+.container .form-control  {
+    font-family: FontAwesome;
+}
+
+.card-title{
+    font-family: 'Mitr', sans-serif;
+    text-align: center;
+    font-size: 40px;
+}
+
+.alert{
+    text-transform:capitalize;
+}
+
+.alert .text{
+    text-transform: lowercase;;
+}
+
+.not{
+    text-align: center;
+    font-family: 'Mitr', sans-serif;
+    text-align: center;
+}
+

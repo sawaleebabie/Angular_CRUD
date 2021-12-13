@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <h1 class="card-title">กรอกข้อมูล <br /></h1>
+    <div class="container-add">
+        <form role="form">
+            <div class="form-group">
+                <div style="text-align: center;" class="input_text">
+                    <div class="row">
+                        <input type="number" class="form-control" name="idfullname" id="idfullname" required
+                            placeholder="ID Name" [(ngModel)]="showData.idName">
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="firstname" id="firstname" required
+                                placeholder="First Name" [(ngModel)]="showData.firstName">
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="lastname" id="lastname" required
+                                placeholder="Last Name" [(ngModel)]="showData.lastName">
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="nickname" id="nickname" required
+                                placeholder="Nickname" [(ngModel)]="showData.nickName">
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input class="form-control" type="date" id="birthday" name="birthday"
+                                [(ngModel)]="showData.date">
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="s">
+                                <h5><b>Gender </b></h5>
+                                <select id="gender" name="gender" class="form-control" [(ngModel)]="showData.gender">
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input class="form-control" id="telNo" name="telNo" required placeholder="09X-XXX-XXXX"
+                                pattern="[0-9]{10}" [(ngModel)]="showData.tel">
+                            <span toggle="#telNo" class="field-icon "></span>
+                        </div>
+                    </div>
+
+                    <div [formGroup]="userEmails" class="email">
+                        <input
+                            [class.is-invalid]="userEmails.get('primaryEmail').invalid && userEmails.get('primaryEmail').touched"
+                            name="yourEmail" id="yourEmail" type="email" class="form-control"
+                            formControlName="primaryEmail" placeholder="your_email@email.com"
+                            [(ngModel)]="showData.Email" />
+
+                        <div *ngIf="(primEmail.invalid && primEmail.touched) || primEmail.dirty">
+                            <small *ngIf="primEmail.errors?.required" class="text-danger">
+                                Primary email is required</small>
+                            <small *ngIf="primEmail.errors?.pattern" class="text-danger">
+                                Please provide a valid email address</small>
+                        </div>
+                    </div>
+
+                    <div class="email">
+                        <input type="password" class="form-control" name="yourPass" id="yourPass" required
+                            placeholder="Password" maxlength="6" [(ngModel)]="showData.password">
+                    </div>
+
+                    <button type="submit" class="btn btn-success" style="margin: 3px" (click)="addData()"
+                        [disabled]="IsEdit == true">เพิ่มข้อมูล</button>
+
+                    <button type="reset" class="btn btn-primary" style="margin: 3px" (click)="resetData(data)">reset
+                        ข้อมูล</button>
+
+                    <button type="submit" class="btn btn-warning" style="margin: 3px" (click)="updateData()"
+                        [disabled]="IsEdit == false">อัพเดตข้อมูล</button>
+
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="container">
+        <div class="card border-info">
+            <div class="card-body">
+                <h3 class="card-title-list">แสดงรายการข้อมูล</h3>
+
+                <div class="search-data">
+                    <br />
+                    <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off"
+                        placeholder="&#61442;  Start searching for a Data">
+                </div> <br />
+
+                <div *ngFor="let item of data | filter:searchText ; let i=index" class="alert alert-info">
+
+                    <div *ngIf="item.gender ==='male'" class="image">
+                        <img src="/assets/man.png" alt="male" height="120">
+                    </div>
+                    <div *ngIf="item.gender ==='female'" class="image">
+                        <img src="/assets/woman.png" alt="female" height="120">
+                    </div>
+
+                    <div class="table">
+                        <table>
+                            <tr>
+                                <td>
+                                    NO. {{item.id}} &nbsp;
+                                </td>
+                                <td>
+                                    <b>{{item.idName}}</b>,
+                                    {{item.firstName}} {{item.lastName}},
+                                    {{item.nickName}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td class="show-email">
+                                    <b>Date</b> : {{item.date}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td class="show-email">
+                                    <b>Gender</b> : {{item.gender}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td class="show-email">
+                                    <b>E-mail</b> : {{item.Email}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td class="show-email">
+                                    <b>Tel.</b> : {{item.tel}}
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <button (click)="editData(item)" class="btn-edit">แก้ไขข้อมูล</button>
+                    <button (click)="deleteData(item)" class="btn-delete">ลบข้อมูล</button>
+                </div>
+
+                <div *ngIf='data.length == 0' class="alert alert-info">
+                    <h4>ไม่มีข้อมูล</h4>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</body>
+
+</html>
